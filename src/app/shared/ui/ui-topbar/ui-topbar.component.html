@@ -1,0 +1,15 @@
+<header class="h-16 flex items-center justify-between bg-white  px-2">
+    <button pButton (click)="toggleSidebar()" class="p-button-text">
+        @if (!isOpen) {
+        <i class="pi pi-angle-double-left !text-2xl" pTooltip="ย่อเมนู" tooltipPosition="bottom"></i>
+        } @else {
+        <i class="pi pi-angle-double-right !text-2xl" pTooltip="ขยายเมนู" tooltipPosition="bottom"></i>
+        }
+    </button>
+    <div>
+        <p-menu #menu [popup]="true" [model]="userMenu"></p-menu>
+        <button pButton class="p-button-rounded p-button-text " (click)="menu.toggle($event)">
+            <i class="pi pi-user !text-2xl"></i>
+        </button>
+    </div>
+</header>

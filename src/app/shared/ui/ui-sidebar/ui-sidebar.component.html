@@ -1,0 +1,11 @@
+<ul class="flex flex-col gap-2 p-2">
+    <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.route" routerLinkActive="bg-green-400 text-white font-medium"
+            class="flex items-center gap-2 p-2 rounded transition-colors duration-200 text-gray-700 hover:bg-surface-200"
+            [pTooltip]="isOpen ? item.label : undefined" tooltipPosition="right">
+            <i [class]="item.icon + ' !text-xl'"></i>
+            @if (!isOpen) {<span>{{ item.label }}</span>}
+        </a>
+
+    </li>
+</ul>

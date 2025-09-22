@@ -1,0 +1,56 @@
+<p-tabs value="0">
+    <p-tablist>
+        <p-tab value="0">เพิ่มห้องเดียว</p-tab>
+        <p-tab value="1">เพิ่มหลายห้องโดยไฟล์CSV</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+        <p-tabpanel value="0">
+            <form [formGroup]="roomForm" (ngSubmit)="addRoom()" class="grid grid-cols-2 gap-6 p-4">
+                <div class="flex flex-col gap-1">
+                    <label for="floor" class="font-medium text-gray-700">ชั้น</label>
+                    <input id="floor" pInputText type="number" formControlName="floor" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="number" class="font-medium text-gray-700">หมายเลขห้อง</label>
+                    <input id="number" pInputText type="number" formControlName="number" />
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="sizeSqM" class="font-medium text-gray-700">ขนาด (ตร.ม.)</label>
+                    <input id="sizeSqM" pInputText type="number" formControlName="sizeSqM" />
+                </div>
+
+                <div class="flex flex-col gap-1">
+                    <label for="monthlyRent" class="font-medium text-gray-700">ค่าเช่า/เดือน (บาท)</label>
+                    <p-inputNumber inputId="monthlyRent" formControlName="monthlyRent" mode="decimal"
+                        [useGrouping]="true" [minFractionDigits]="0"></p-inputNumber>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <label for="deposit" class="font-medium text-gray-700">เงินมัดจำ (บาท)</label>
+                    <p-inputNumber inputId="deposit" formControlName="deposit" mode="decimal" [useGrouping]="true"
+                        [minFractionDigits]="0"></p-inputNumber>
+                </div>
+                <div class="col-span-2 flex justify-end gap-3 mt-6">
+                    <p-button type="button" label="ยกเลิก" severity="secondary" (onClick)="onCancel()" />
+                    <p-button type="submit" label="บันทึก" [disabled]="roomForm.invalid"/>
+                </div>
+            </form>
+        </p-tabpanel>
+        <p-tabpanel value="1">
+            <div class="p-4 flex flex-col gap-6">
+                <div class="flex flex-col items-center justify-center h-64 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 cursor-pointer"
+                    (click)="csvInput.click()">
+                    <i class="pi pi-upload !text-4xl text-gray-400 mb-3"></i>
+                    <p class="text-gray-600">ลากไฟล์ CSV มาวางที่นี่ หรือกดเลือกไฟล์</p>
+                    <button pButton type="button" label="เลือกไฟล์ CSV" icon="pi pi-file" class="mt-3"></button>
+                    <input #csvInput type="file" accept=".csv" class="hidden" (change)="onFileUpload($event)" />
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <p class="text-gray-500 text-sm">ยังไม่มีไฟล์? ดาวน์โหลดตัวอย่าง CSV ได้ที่นี่</p>
+                    <a href="assets/templates/room_template.csv" download pButton type="button" icon="pi pi-download"
+                        label="Download Template" severity="secondary"></a>
+                </div>
+            </div>
+        </p-tabpanel>
+    </p-tabpanels>
+</p-tabs>

@@ -1,0 +1,26 @@
+<form [formGroup]="editRoomForm" (ngSubmit)="onSave()" class="grid grid-cols-2 gap-6 p-4">
+    <div class="flex flex-col gap-1">
+        <label for="floor" class="font-medium text-gray-700">ชั้น</label>
+        <input id="floor" pInputText type="number" formControlName="floor" />
+    </div>
+    <div class="flex flex-col gap-1">
+        <label for="number" class="font-medium text-gray-700">หมายเลขห้อง</label>
+        <input id="number" pInputText type="text" formControlName="number" />
+    </div>
+    <div class="flex flex-col gap-1">
+        <label for="sizeSqM" class="font-medium text-gray-700">ขนาด (ตร.ม.)</label>
+        <input id="sizeSqM" pInputText type="number" formControlName="sizeSqM" />
+    </div>
+    <div class="flex flex-col gap-1">
+        <label for="monthlyRent" class="font-medium text-gray-700">ค่าเช่า/เดือน</label>
+        <input id="monthlyRent" pInputText type="number" formControlName="monthlyRent" />
+    </div>
+    <div class="flex flex-col gap-1">
+        <label for="deposit" class="font-medium text-gray-700">เงินมัดจำ</label>
+        <input id="deposit" pInputText type="number" formControlName="deposit" />
+    </div>
+    <div class="col-span-2 flex justify-end gap-3 mt-6">
+        <p-button type="button" label="ยกเลิก" severity="secondary" (onClick)="onCancel()" />
+        <p-button type="submit" label="บันทึก" [disabled]="editRoomForm.invalid" />
+    </div>
+</form>

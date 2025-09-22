@@ -1,0 +1,32 @@
+<div class="grid grid-cols-4 gap-4 mb-8">
+    <div (click)="filterByStatus('VACANT')" [ngClass]="{'ring-2 ring-green-500': activeStatusFilter === 'VACANT'}"
+        class="flex flex-col items-center justify-center gap-2 p-6 bg-white rounded-xl shadow-md cursor-pointer hover:bg-gray-50">
+        <i class="fa-solid fa-circle-check text-green-500 text-3xl"></i>
+        <span class="text-2xl font-bold">{{roomSummary?.availableRooms}}</span>
+        <span class="text-gray-600">ห้องพักว่าง</span>
+    </div>
+    <div (click)="filterByStatus('OCCUPIED')" [ngClass]="{'ring-2 ring-blue-500': activeStatusFilter === 'OCCUPIED'}" class=" flex flex-col items-center justify-center gap-2 p-6 bg-white
+        rounded-xl shadow-md cursor-pointer hover:bg-gray-50">
+        <i class="fa-solid fa-users text-blue-500 text-3xl"></i>
+        <span class="text-2xl font-bold">{{roomSummary?.occupiedRooms}}</span>
+        <span class="text-gray-600">ห้องพักที่มีคนเช่า</span>
+    </div>
+    <div (click)="filterByStatus('MAINTENANCE')" [ngClass]="{'ring-2 ring-yellow-500': activeStatusFilter === 'MAINTENANCE'}"
+        class=" flex flex-col items-center justify-center gap-2 p-6 bg-white rounded-xl shadow-md cursor-pointer
+        hover:bg-gray-50">
+        <i class="fa-solid fa-screwdriver-wrench text-yellow-500 text-3xl"></i>
+        <span class="text-2xl font-bold">{{roomSummary?.inMaintenance}}</span>
+        <span class="text-gray-600">ห้องพักที่ต้องซ่อมแซม</span>
+    </div>
+    <div (click)="filterByStatus('ALL')" [ngClass]="{'ring-2 ring-purple-500': activeStatusFilter === 'ALL'}"
+        class="flex flex-col items-center justify-center gap-2 p-6 bg-white rounded-xl shadow-md cursor-pointer hover:bg-gray-50">
+        <i class="fa-solid fa-building text-purple-500 text-3xl"></i>
+        <span class="text-2xl font-bold">{{roomSummary?.totalUnits}}</span>
+        <span class="text-gray-600">ห้องพักทั้งหมด</span>
+    </div>
+</div>
+<p-card>
+    <p-button (onClick)="addRoom()" class="flex justify-end" label="เพิ่มห้อง" icon="pi pi-plus" />
+    <ui-table class="p-6" dataKey="id" [columns]="columns" [data]="roomsData" [globalFilterFields]="filterFields"
+        (edit)="editRoom($event)" (remove)="onRemove($event)"></ui-table>
+</p-card>

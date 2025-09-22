@@ -1,0 +1,62 @@
+<p-table #dt [value]="data" dataKey="id" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 25, 50]" [loading]="!data || data.length === 0" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+    [globalFilterFields]="globalFilterFields">
+    <ng-template #caption>
+        <div class="flex justify-between">
+            <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear" (click)="clear(dt)" />
+            <p-iconField iconPosition="left">
+                <p-inputIcon>
+                    <i class="pi pi-search"></i>
+                </p-inputIcon>
+                <input pInputText type="text" [(ngModel)]="searchValue"
+                    (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Keyboard Search" />
+            </p-iconField>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.sortable ? col.field : undefined"
+                style="width: auto">
+                <div class="flex justify-between items-center">
+                    {{ col.header }}
+                    <p-sortIcon *ngIf="col.sortable" [field]="col.field"></p-sortIcon>
+                </div>
+            </th>
+            <th style="text-align:center">แก้ไข</th>
+            <th style="text-align:center">ลบ</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-row>
+        <tr class="p-selectable-row">
+            
+            <td *ngFor="let col of columns">
+                <ng-container [ngSwitch]="col.type">
+                    <span *ngSwitchCase="'date'">
+                        {{ row[col.field.split('.')[0]] | date: 'MM/dd/yyyy' }}
+                    </span>
+                    <span *ngSwitchCase="'currency'">
+                        {{ row[col.field] | currency: 'USD' : 'symbol' }}
+                    </span>
+                    <p-tag *ngSwitchCase="'status'" [value]="row[col.field]" [severity]="getSeverity(row[col.field])">
+                    </p-tag>
+                    <span *ngSwitchDefault>
+                        {{ getValue(row, col.field) }}
+                    </span>
+                </ng-container>
+            </td>
+            <td style="text-align: center">
+                <p-button rounded icon="pi pi-pencil" severity="primary" (click)="onEdit(row)"></p-button>
+            </td>
+            <td style="text-align: center">
+                <p-button rounded icon="pi pi-trash" severity="danger" (click)="onDelete(row)"></p-button>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>
