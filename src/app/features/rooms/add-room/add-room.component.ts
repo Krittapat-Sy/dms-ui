@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { RoomsService } from '../rooms.service';
 import { Room } from '../rooms.model';
-import * as Papa from 'Papaparse';
+import Papa from 'papaparse';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 
