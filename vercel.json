@@ -2,10 +2,10 @@
     "version": 2,
     "buildCommand": "ng build --configuration=production",
     "outputDirectory": "dist/frontend",
-    "routes": [
+    "rewrites": [
         {
-            "src": "/.*",
-            "dest": "/index.html"
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ]
 }
