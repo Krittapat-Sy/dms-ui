@@ -18,7 +18,7 @@ export class RoomsService {
   createRooms(rooms: Room[]): Observable<any> {
     return this.http.post(`${this.apiUrl}/rooms`, rooms);
   }
-
+//
   updateRoom(room: Room): Observable<any> {
     return this.http.put(`${this.apiUrl}/rooms/${room.id}`, room);
   }
